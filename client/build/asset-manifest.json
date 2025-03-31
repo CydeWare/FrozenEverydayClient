@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.61e311d7.css",
-    "main.js": "/static/js/main.d3ff61c9.js",
+    "main.js": "/static/js/main.28754eaa.js",
     "static/media/Black and White Frozen Goods Banner.png": "/static/media/Black and White Frozen Goods Banner.c50eefc8fd873fba1084.png",
     "static/media/image1.png": "/static/media/image1.5803117a0b8ba1cb6446.png",
     "static/media/Red Frozen Food Available Here Poster.png": "/static/media/Red Frozen Food Available Here Poster.939f3dfa89760091c12e.png",
@@ -439,10 +439,10 @@
     "static/media/no-product5.webp": "/static/media/no-product5.8a9b0b74cf72a201667e.webp",
     "index.html": "/index.html",
     "main.61e311d7.css.map": "/static/css/main.61e311d7.css.map",
-    "main.d3ff61c9.js.map": "/static/js/main.d3ff61c9.js.map"
+    "main.28754eaa.js.map": "/static/js/main.28754eaa.js.map"
   },
   "entrypoints": [
     "static/css/main.61e311d7.css",
-    "static/js/main.d3ff61c9.js"
+    "static/js/main.28754eaa.js"
   ]
 }
