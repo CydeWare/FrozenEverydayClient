@@ -1,12 +1,15 @@
 {
-  "version": 2,
-  "builds": [{
-    "src": "package.json",
-    "use": "@vercel/static-build",
-    "config": {
-      "distDir": "build",
-      "installCommand": "npm install --legacy-peer-deps",
-      "buildCommand": "npm run build"
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": {
+        "installCommand": "npm install --no-fund --no-audit --no-optional",
+        "buildCommand": "chmod +x ./node_modules/.bin/react-scripts && npm run build"
+      }
     }
-  }]
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
 }
