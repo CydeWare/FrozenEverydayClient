@@ -15,9 +15,9 @@ root.render(
     <Provider store={store}>
         <React.StrictMode>
             {/* REMOVE THIS CLIENT ID AND USE ENV FILE TO FETCH IT */}
-            <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
+            // <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
                 <App />
-            </GoogleOAuthProvider>
+            // </GoogleOAuthProvider>
         </React.StrictMode>
     </Provider>
 );
