@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import useStyles from "./styles.js";
 import Avatar from "@mui/material/Avatar";
 // import { Link } from "react-router-dom";
@@ -56,7 +56,7 @@ const Navbar = () => {
     const token = user?.token;
 
     if (token) {
-      const decodedToken = decode(token);
+      const decodedToken = jwtDecode(token);
 
       //decodedToken.exp is in miliseconds so we have to mutiply by 1000
       if (decodedToken.exp * 1000 < new Date().getTime()) {
