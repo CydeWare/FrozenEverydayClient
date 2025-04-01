@@ -158,43 +158,43 @@ const Account = () => {
     return setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const handleLogin = useGoogleLogin({
-    // flow: 'auth-code',
-    // scope: "https://www.googleapis.com/auth/userinfo.profile",
-    onSuccess: async (tokenResponse) => {
-      console.log(tokenResponse);
-      const data = await fetch(
-        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${tokenResponse.access_token}`
-      );
-      const result = await data?.json();
-      // console.log(data);
-      // console.log(result);
+  // const handleLogin = useGoogleLogin({
+  //   // flow: 'auth-code',
+  //   // scope: "https://www.googleapis.com/auth/userinfo.profile",
+  //   onSuccess: async (tokenResponse) => {
+  //     console.log(tokenResponse);
+  //     const data = await fetch(
+  //       `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${tokenResponse.access_token}`
+  //     );
+  //     const result = await data?.json();
+  //     // console.log(data);
+  //     // console.log(result);
 
-      // const secret = new TextEncoder().encode(
-      //     "test"
-      // );
+  //     // const secret = new TextEncoder().encode(
+  //     //     "test"
+  //     // );
 
-      // const token = await new jose.SignJWT({ email: result.email, id: result.sub}).setProtectedHeader({ alg: "HS256"}).setExpirationTime('1h').sign(secret);
+  //     // const token = await new jose.SignJWT({ email: result.email, id: result.sub}).setProtectedHeader({ alg: "HS256"}).setExpirationTime('1h').sign(secret);
 
-      // console.log(token);
+  //     // console.log(token);
 
-      // const secret = new TextEncoder().encode("test");
+  //     // const secret = new TextEncoder().encode("test");
 
-      // const jwt = await new SignJWT({ email: result.email, id: result.sub })
-      //             .setProtectedHeader({ alg: "HS256" })
-      //             .setExpirationTime('1h')
-      //             .sign(secret);
+  //     // const jwt = await new SignJWT({ email: result.email, id: result.sub })
+  //     //             .setProtectedHeader({ alg: "HS256" })
+  //     //             .setExpirationTime('1h')
+  //     //             .sign(secret);
 
-      try {
-        dispatch(sign(result, navigate));
-      } catch (error) {
-        console.log(error);
-      }
+  //     try {
+  //       dispatch(sign(result, navigate));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
 
-      //In google login, make your own token?
-    },
-    onError: (tokenResponse) => console.log(tokenResponse),
-  });
+  //     //In google login, make your own token?
+  //   },
+  //   onError: (tokenResponse) => console.log(tokenResponse),
+  // });
 
   function showError(error) {
     if (error) {
