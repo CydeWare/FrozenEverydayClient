@@ -110,16 +110,16 @@ const Products = () => {
     require.context("../images", false, /\.(png|jpe?g|svg|webp|avif)$/)
   );
 
-  useEffect(() => {
-    // Cache base64 images for faster re-rendering
-    const newCache = {};
-    productFiles.forEach((product) => {
-      if (product.image) {
-        newCache[product.ProductID] = `data:image/jpeg;base64,${product.image}`;
-      }
-    });
-    setImageCache(newCache);
-  }, [productFiles]);
+  // useEffect(() => {
+  //   // Cache base64 images for faster re-rendering
+  //   const newCache = {};
+  //   productFiles.forEach((product) => {
+  //     if (product.image) {
+  //       newCache[product.ProductID] = `data:image/jpeg;base64,${product.image}`;
+  //     }
+  //   });
+  //   setImageCache(newCache);
+  // }, [productFiles]);
 
   function onPageChange(pageNum) {
     setPage(pageNum);
