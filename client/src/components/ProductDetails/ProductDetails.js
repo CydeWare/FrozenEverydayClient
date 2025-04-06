@@ -445,6 +445,7 @@ const ProductDetails = () => {
                     </video>
                   ) : files.length > 0 ? (
                     <img
+                       loading="lazy"
                       src={files[imageIndex]?.FileData}
                       width="100%"
                       id="ProductImg"
@@ -457,7 +458,7 @@ const ProductDetails = () => {
                 ) : files.length > 0 ? (
                   <img
                     src={files[imageIndex]?.FileData}
-          
+                    loading="lazy"
                     width="100%"
                     id="ProductImg"
                     alt=""
@@ -492,6 +493,7 @@ const ProductDetails = () => {
                       <div className="small-img-col" key={i}>
                         <img
                           src={file?.FileData}
+                            loading="lazy"
                           width="100%"
                           alt=""
                           className="small-img"
