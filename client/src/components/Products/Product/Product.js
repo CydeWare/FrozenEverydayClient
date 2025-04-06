@@ -52,6 +52,8 @@ const Product = ({ product }) => {
             <img
               src={image.FileData}
               alt={product.Title}
+              loading="lazy" 
+              decoding="async"
               onError={(e) => (e.target.src = images["no-product5.webp"])}
             />
           ) : (
