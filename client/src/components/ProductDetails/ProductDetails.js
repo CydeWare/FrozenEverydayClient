@@ -448,6 +448,8 @@ const ProductDetails = () => {
                       src={files[imageIndex]?.FileData}
                       width="100%"
                       id="ProductImg"
+                      loading="lazy" 
+                      decoding="async"
                       alt=""
                     />
                   ) : (
@@ -456,6 +458,8 @@ const ProductDetails = () => {
                 ) : files.length > 0 ? (
                   <img
                     src={files[imageIndex]?.FileData}
+                    loading="lazy" 
+                    decoding="async"
                     width="100%"
                     id="ProductImg"
                     alt=""
@@ -493,6 +497,8 @@ const ProductDetails = () => {
                           width="100%"
                           alt=""
                           className="small-img"
+                            loading="lazy" 
+                      decoding="async"
                           onClick={() => 
                             file?.FileData && changeVideoToImage(i)
                           }
