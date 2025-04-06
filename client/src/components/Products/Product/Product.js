@@ -47,11 +47,12 @@ const Product = ({ product }) => {
       <div className="layer-container">
         <Link to={`/product-details/${product.ProductID}`}>
           {/* <img src={image ? image.FileData : images["no-product5.webp"]} alt="" /> */}
-          {/* {image?.FileData ? <img src={image ? image.FileData : images["no-product5.webp"]} alt="" /> : <div className="loader2"></div>} */}
+          {/* {image?.FileData ? <img loading="lazy" src={image ? image.FileData : images["no-product5.webp"]} alt="" /> : <div className="loader2"></div>} */}
           {image?.FileData ? (
             <img
               src={image.FileData}
               alt={product.Title}
+              loading="lazy"
               onError={(e) => (e.target.src = images["no-product5.webp"])}
             />
           ) : (
