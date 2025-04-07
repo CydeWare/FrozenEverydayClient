@@ -265,7 +265,7 @@ const ProductDetails = () => {
     //   user?.result?.PostalCode
     // }.%0A%0ATerima Kasih!`;
 
-    message += `%0A💰 *Total Harga: Rp. ${formatRupiah(totalPrice)}*%0A%0ASaya berasal dari *${user?.result?.Country}* dan ingin produk ini dikirim ke:%0A%0A📍 *Kota:* ${user?.result?.City}%0A🏠 *Alamat:* ${user?.result?.Address}%0A📮 *Kode Pos:* ${user?.result?.PostalCode}%0A%0A🙏 Terima kasih!`;
+    message += `%0A*Total Harga: Rp. ${formatRupiah(totalPrice)}*%0A%0ASaya berasal dari *${user?.result?.Country}* dan ingin produk ini dikirim ke:%0A%0A📍 *Kota:* ${user?.result?.City}%0A🏠 *Alamat:* ${user?.result?.Address}%0A📮 *Kode Pos:* ${user?.result?.PostalCode}%0A%0A🙏 Terima kasih!`;
 
     
 
