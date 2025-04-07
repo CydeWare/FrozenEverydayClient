@@ -252,7 +252,7 @@ const ProductDetails = () => {
     const phoneNumber = "6289507932832"; // Replace with merchant's WhatsApp number (use international format)
 
     let message = `Halo, saya mau pesan produk:%0A%0A- ${product?.Title} ${
-    selectedVariant ? `(${selectedVariant})` : ""}- ${quantity} pcs - Rp. ${formatRupiah(totalPrice)}%0A%0A`; // WhatsApp uses %0A for
+    selectedVariant ? `(${selectedVariant})` : ""}- ${quantity} pcs - Rp. ${formatRupiah(totalPrice)}%0A`; // WhatsApp uses %0A for
     // line breaks
 
     // message += `*Total Harga: Rp. ${formatRupiah(
