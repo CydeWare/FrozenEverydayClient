@@ -255,15 +255,17 @@ const ProductDetails = () => {
     selectedVariant ? `(${selectedVariant})` : ""}- ${quantity} pcs - Rp. ${formatRupiah(totalPrice)}%0A%0A`; // WhatsApp uses %0A for
     // line breaks
 
-    message += `*Total Harga: Rp. ${formatRupiah(
-      totalPrice
-    )}*%0A%0ASaya dari negara ${
-      user?.result?.Country
-    } dan minta produk ini dikirim ke kota ${
-      user?.result?.City
-    } dengan alamat ${user?.result?.Address} dan postal code ${
-      user?.result?.PostalCode
-    }.%0A%0ATerima Kasih!`;
+    // message += `*Total Harga: Rp. ${formatRupiah(
+    //   totalPrice
+    // )}*%0A%0ASaya dari negara ${
+    //   user?.result?.Country
+    // } dan minta produk ini dikirim ke kota ${
+    //   user?.result?.City
+    // } dengan alamat ${user?.result?.Address} dan postal code ${
+    //   user?.result?.PostalCode
+    // }.%0A%0ATerima Kasih!`;
+
+    message += `💰 *Total Harga: Rp${formatRupiah(totalPrice)}*%0A%0ASaya berasal dari *${user?.result?.Country}* dan ingin produk ini dikirim ke:%0A%0A📍 *Kota:* ${user?.result?.City}%0A🏠 *Alamat:* ${user?.result?.Address}%0A📮 *Kode Pos:* ${user?.result?.PostalCode}%0A%0A🙏 Terima kasih!`;
 
     
 
