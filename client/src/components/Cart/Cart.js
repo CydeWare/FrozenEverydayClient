@@ -13,6 +13,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [emailMsg, setEmailMsg] = useState("");
+  const [cart, setCart] = useState([]);
 
   let cartItems = useSelector((state) => {
     return state.cart;
@@ -27,12 +28,19 @@ const Cart = () => {
           user?.result?.UserID ? user?.result?.UserID : user?.result?.sub
         )
       );
+
+      setCart(cartItems);
     } else {
+      // setCart(undefined);
       cartItems = undefined;
     }
 
     console.log("Cart Items: ", cartItems);
   }, [user]);
+
+  useEffect(() => {
+    setCart(cartItems);
+  }, [cartItems]);
 
   function importAll(r) {
     let images = {};
@@ -43,7 +51,7 @@ const Cart = () => {
   }
 
   const images = importAll(
-    require.context("../images", false, /\.(png|jpe?g|svg|avif|webp)$/)
+    require.context("../../../public/images", false, /\.(png|jpe?g|svg|avif|webp)$/)
   );
 
   // For adding the subtotal
@@ -60,20 +68,28 @@ const Cart = () => {
   }
   
 
+  // useEffect(() => {
+  //   cart?.map((cartItem) => {
+  //     total =
+  //       total +
+  //       parseFloat(
+  //         parseFloat(cartItem?.Price) * parseFloat(cartItem?.Quantity)
+  //       );
+  //     // parseFloat(cartItem?.Price);
+  //   });
+
+  //   console.log("Total: ", total);
+
+  //   setSubtotal(parseFloat(total));
+  // }, [cart]);
+
   useEffect(() => {
-    cartItems?.map((cartItem) => {
-      total =
-        total +
-        parseFloat(
-          parseFloat(cartItem?.Price) * parseFloat(cartItem?.Quantity)
-        );
-      // parseFloat(cartItem?.Price);
-    });
-
-    console.log("Total: ", total);
-
-    setSubtotal(parseFloat(total));
-  }, [cartItems]);
+  let total = 0;
+  cart?.forEach(cartItem => {
+    total += parseFloat(cartItem?.Price) * parseFloat(cartItem?.Quantity);
+  });
+  setSubtotal(total);
+}, [cart]);
 
   const generateWhatsAppMessage = (cartItems, totalPrice) => {
     const phoneNumber = "6289507932832"; // Replace with merchant's WhatsApp number (use international format)
@@ -87,7 +103,15 @@ const Cart = () => {
       } pcs - Rp. ${formatRupiah(item.Price * item.Quantity)}%0A`;
     });
 
-    message += `%0A*Total Harga: Rp. ${formatRupiah(totalPrice)}*%0A%0ASaya berasal dari *${user?.result?.Country}* dan ingin produk ini dikirim ke:%0A%0A📍 *Kota:* ${user?.result?.City}%0A🏠 *Alamat:* ${user?.result?.Address}%0A📮 *Kode Pos:* ${user?.result?.PostalCode}%0A%0A🙏 Terima kasih!`;
+    message += `%0A*Total Harga: Rp. ${formatRupiah(
+      totalPrice
+    )}*%0A%0ASaya dari negara ${
+      user?.result?.Country
+    } dan minta produk-produk ini dikirim ke kota ${
+      user?.result?.City
+    } dengan alamat ${user?.result?.Address} dan postal code ${
+      user?.result?.PostalCode
+    }.%0A%0ATerima Kasih!`;
 
     
 
@@ -166,22 +190,22 @@ const Cart = () => {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
       />
       <section className="modal">
-        {/* <button class="show-modal" onClick={() => showButton()}>Show Modal</button> */}
-        <span class="overlay" onClick={() => overlayFunc()}></span>
-        <div class="modal-box">
+        {/* <button className="show-modal" onClick={() => showButton()}>Show Modal</button> */}
+        <span className="overlay" onClick={() => overlayFunc()}></span>
+        <div className="modal-box">
           <i
-            class="fa fa-window-close-o close-icon"
+            className="fa fa-window-close-o close-icon"
             aria-hidden="true"
             onClick={() => closeBtnFunc()}
           ></i>
-          <i class="fa fa-whatsapp whatsapp" aria-hidden="true"></i>
+          <i className="fa fa-whatsapp whatsapp" aria-hidden="true"></i>
           <h2>Terkirim</h2>
           <h3>
             Anda akan diarahkan ke akun WhatsApp penjual. Silahkan kirimkan
             pesan WhatsApp ke penjual.
           </h3>
-          <div class="buttons">
-            <button class="close-btn" onClick={() => closeBtnFunc()}>
+          <div className="buttons">
+            <button className="close-btn" onClick={() => closeBtnFunc()}>
               Tutup
             </button>
             <button
@@ -191,7 +215,7 @@ const Cart = () => {
             </button>
           </div>
           <h3 style={{ marginTop: "10px" }}>Atau kirim lewat cara lain:</h3>
-          {/* <i class="fa fa-envelope email-icon" aria-hidden="true"></i> */}
+          {/* <i className="fa fa-envelope email-icon" aria-hidden="true"></i> */}
           <img
             style={{ width: "100px", marginTop: "10px", marginBottom: "10px" }}
             src={images["gmail-logo-2.png"]}
@@ -199,7 +223,7 @@ const Cart = () => {
           />
           <h4>Email</h4>
 
-          <div class="buttons">
+          <div className="buttons">
             <button onClick={() => sendOrder(cartItems, subtotal)}>
               Kirim lewat Email
             </button>
@@ -270,35 +294,29 @@ const Cart = () => {
             </tr> */}
 
             {user?.result ? (
-              cartItems ? (
-                cartItems.length === 0 ? (
-                  <div
-                    style={{
-                      marginTop: "50px",
-                      marginBottom: "70px",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <h1>Tidak ada produk di dalam keranjang.</h1>
-                    <Link to="/products">
-                      <span className="btn">Beli makanan</span>
-                    </Link>
-                  </div>
-                ) : (
-                  cartItems.map((cartItem) => {
-                    return (
-                      <CartItem
-                        key={cartItem.id}
-                        cartItem={{
-                          ...cartItem,
-                          CartItemID: cartItem.CartItemID,
-                        }}
-                      />
-                    );
-                  })
-                )
-              ) : (
+              cart ? (
+                cart.length === 0 ? (
+  <tr>
+    <td colSpan="3" style={{ textAlign: "center", padding: "40px" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <h1>Tidak ada produk di dalam keranjang.</h1>
+        <Link to="/products">
+          <span className="btn">Beli makanan</span>
+        </Link>
+      </div>
+    </td>
+  </tr>
+) : (
+  cart.map((cartItem) => (
+    <CartItem
+      key={cartItem.id}
+      cartItem={{
+        ...cartItem,
+        CartItemID: cartItem.CartItemID,
+      }}
+    />
+  ))
+)) : (
                 // <div
                 //   style={{
                 //     marginTop: "50px",
@@ -366,13 +384,13 @@ const Cart = () => {
           src={images["paypal-logo-removebg-preview.png"]}
         />
       </span> */}
-          {user && cartItems?.length > 0 && (
+          {user && cart?.length > 0 && (
             <span
               className="btn"
-              // onClick={() => generateWhatsAppMessage(cartItems, subtotal)}
+              // onClick={() => generateWhatsAppMessage(cart, subtotal)}
               onClick={() => {
                 showButton();
-                return generateWhatsAppMessage(cartItems, subtotal);
+                return generateWhatsAppMessage(cart, subtotal);
               }}
             >
               Check Out
@@ -384,10 +402,10 @@ const Cart = () => {
       <div className="footer">
         <div className="container">
           <div className="row">
-            {/* <div class="footer-col-1">
+            {/* <div className="footer-col-1">
                 <h3>Download Our App</h3>
                 <p>Download App for Android and ios mobile phone.</p>
-                <div class="app-logo">
+                <div className="app-logo">
                     <img src={images["play-store.png"]} alt="">
                     <img src={images["app-store.png"]} alt="">
                 </div>
@@ -399,7 +417,7 @@ const Cart = () => {
                 terbaik.
               </p>
             </div>
-            {/* <div class="footer-col-3">
+            {/* <div className="footer-col-3">
                 <h3>Useful Link</h3>
                 <ul>
                     <li>Coupons</li>
@@ -408,13 +426,13 @@ const Cart = () => {
                     <li>Join Affiliate</li>
                 </ul>
             </div> */}
-            {/* <div class="footer-col-4">
+            {/* <div className="footer-col-4">
                 <h3>Follow Us</h3>
-                <ul class="follow-us">
-                    <li>Facebook<i class="fa fa-facebook-official" aria-hidden="true"></i></li>
-                    <li>Twitter<i class="fa fa-twitter" aria-hidden="true"></i></li>
-                    <li>Instagram<i class="fa fa-instagram" aria-hidden="true"></i></li>
-                    <li>YouTube<i class="fa fa-youtube-play" aria-hidden="true"></i></li>
+                <ul className="follow-us">
+                    <li>Facebook<i className="fa fa-facebook-official" aria-hidden="true"></i></li>
+                    <li>Twitter<i className="fa fa-twitter" aria-hidden="true"></i></li>
+                    <li>Instagram<i className="fa fa-instagram" aria-hidden="true"></i></li>
+                    <li>YouTube<i className="fa fa-youtube-play" aria-hidden="true"></i></li>
                 </ul>
             </div> */}
           </div>
