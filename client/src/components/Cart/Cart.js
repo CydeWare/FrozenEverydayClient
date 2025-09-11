@@ -51,7 +51,7 @@ const Cart = () => {
   }
 
   const images = importAll(
-    require.context("../../../public/images", false, /\.(png|jpe?g|svg|avif|webp)$/)
+    require.context("../images", false, /\.(png|jpe?g|svg|avif|webp)$/)
   );
 
   // For adding the subtotal
